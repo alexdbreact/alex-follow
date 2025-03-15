@@ -1,8 +1,8 @@
 import { cookies } from "next/headers";
 
 const ADMIN_CREDENTIALS = {
-  username: "Admin",
-  password: "3724",
+  username: "admin",
+  password: "37",
 };
 
 export async function POST(req) {
