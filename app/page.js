@@ -2,8 +2,7 @@
 import { useRouter } from "next/navigation";
 import { FaFileSignature } from "react-icons/fa6";
 import Image from "next/image";
-import alexz from "../public/alexz.png"
-import intro from "../public/intro.jpg"
+
 import "./globals.css"
 
 
