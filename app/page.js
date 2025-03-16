@@ -14,7 +14,7 @@ export default function page() {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 ">
  <Image
-    className="h-screen w-screen absolute "
+    className="h-auto w-screen absolute "
       src={intro}
      
       alt="intro"
@@ -23,7 +23,7 @@ export default function page() {
         
 
       </Image>
-   <div className="py-12 px-4 border border-blue-100 flex flex-col justify-center  items-center rounded-lg bg-gradient-to-b from-blue-100 to-transparent">
+   <div className=" z-50 py-12 px-4 border border-blue-100 flex flex-col justify-center  items-center rounded-lg bg-gradient-to-b from-blue-100 to-transparent">
 
      <h1 className="text-3xl font-bold mb-6 text-blue-800 ">لوحة التحكم الرئيسية</h1>
       <button
