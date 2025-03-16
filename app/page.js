@@ -2,6 +2,8 @@
 import { useRouter } from "next/navigation";
 import { FaFileSignature } from "react-icons/fa6";
 import Image from "next/image";
+import intro from "../public/intro.jpg"
+
 
 import "./globals.css"
 
@@ -10,20 +12,17 @@ export default function page() {
   const router = useRouter();
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 intro">
-   {/*
-    <Image
+    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 ">
+ <Image
+    className="h-screen w-screen absolute "
       src={intro}
-      width={100}
-      height={100}
+     
       alt="intro"
       
       >
         
 
       </Image>
-   
-   */}  
    <div className="py-12 px-4 border border-blue-100 flex flex-col justify-center  items-center rounded-lg bg-gradient-to-b from-blue-100 to-transparent">
 
      <h1 className="text-3xl font-bold mb-6 text-blue-800 ">لوحة التحكم الرئيسية</h1>
