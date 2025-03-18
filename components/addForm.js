@@ -146,6 +146,7 @@ const Form = () => {
         <div className="relative bg-inherit ">
           <DatePicker
             selected={startDate}
+            dateFormat="dd/MM/yyyy" 
             onChange={(date) => setStartDate(date)}
             className="  h-10  rounded-lg text-gray-900  ring-2 px-2 ring-gray-500 focus:ring-sky-600 focus:outline-none focus:border-rose-600"
           />
@@ -209,6 +210,7 @@ const Form = () => {
           <DatePicker
             selected={startDateout}
             onChange={(date) => setStartDateout(date)}
+            dateFormat="dd/MM/yyyy"
             className="  h-10  rounded-lg text-gray-900  ring-2 px-2 ring-gray-500 focus:ring-sky-600 focus:outline-none focus:border-rose-600"
           />
 
