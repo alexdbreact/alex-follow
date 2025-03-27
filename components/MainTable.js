@@ -15,7 +15,7 @@ export default function DataTables() {
 
   const [dayFilter, setDayFilter] = useState("");
   const [monthFilter, setMonthFilter] = useState("");
-  const [rowsPerPage, setRowsPerPage] = useState(10);
+  const [rowsPerPage, setRowsPerPage] = useState(20);
   const [currentPage, setCurrentPage] = useState(1);
 
 
@@ -348,9 +348,9 @@ export default function DataTables() {
           onChange={(e) => setRowsPerPage(parseInt(e.target.value))}
           className="border p-2 rounded"
         >
-          <option value={5}>5 rows</option>
-          <option value={10}>10 rows</option>
-          <option value={15}>15 rows</option>
+          <option value={20}>20 rows</option>
+          <option value={40}>40 rows</option>
+          <option value={60}>60 rows</option>
         </select>
       </div>
     </div>
