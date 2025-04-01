@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import AllTable from '@/components/AllTable'
+import AllTable from '@/components/AllVip'
 
 
 
