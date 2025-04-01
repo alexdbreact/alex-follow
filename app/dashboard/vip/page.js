@@ -1,5 +1,5 @@
 import React from 'react'
-import AddForm from '@/components/addForm'
+import AddForm from '@/components/addVip'
 import { PiFolderStarBold } from "react-icons/pi";
 import Link from 'next/link'
 import { SiBeatstars } from "react-icons/si";
