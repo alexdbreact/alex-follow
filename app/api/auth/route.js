@@ -17,11 +17,11 @@ export async function POST(req) {
 }
 
 export async function GET() {
-  const session = cookies().get("session");
+  const session = await cookies().get("session");
   return session ? new Response(null, { status: 200 }) : new Response(null, { status: 401 });
 }
 
 export async function DELETE() {
-  cookies().delete("session");
+  await cookies().delete("session");
   return new Response(null, { status: 200 });
 }
