@@ -1,288 +1,270 @@
 "use client";
-import React, { useState } from "react";
-import { useRouter } from "next/navigation";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
-import { CiCalendarDate } from "react-icons/ci";
+import { useState, useEffect } from "react";
+import dayjs from "dayjs";
+import Link from "next/link";
+import RemoveBtn2 from "./RemoveBtn2";
 
 
+export default function DataTables() {
+  const [data, setData] = useState([]);
+ 
+  const [dayFilter, setDayFilter] = useState("");
+  const [monthFilter, setMonthFilter] = useState("");
+  const [rowsPerPage, setRowsPerPage] = useState(10);
+  const [currentPage, setCurrentPage] = useState(1);
 
 
-const Form = () => {
-
+  
  
 
-  const [tit, setTit] = useState("");
-  const [summ, setSumm] = useState("");
-  const [startDate, setStartDate] = useState(new Date());
-  const [start, setStart] = useState("");
-  const [tash, setTash] = useState("");
-    const [startDateout, setStartDateout] = useState("");
-  
-  const [refer, setRefer] = useState("");
- 
-   const [respo1, setRespo1] = useState("");
-   const [respo2, setRespo2] = useState("");
-   const [respo3, setRespo3] = useState("");
-   const [respo4, setRespo4] = useState("");
-   const [respo5, setRespo5] = useState("");
-   const [respo6, setRespo6] = useState("");
-   const [respo7, setRespo7] = useState("");
-   const [respo8, setRespo8] = useState("");
-   const [respo9, setRespo9] = useState("");
-   const [respo10, setRespo10] = useState("");
+  useEffect(() => {
+    const getalls = async () => {
+      try {
+        const res = await fetch("/api/alls", {
+          cache: "no-store",
+        });
+        if (!res.ok) {
+          throw new Error("Failed to fetch");
+        }
 
-      
-      const [from1, setFrom1] = useState("");
-      const [from2, setFrom2] = useState("");
-      const [from3, setFrom3] = useState("");
-      const [from4, setFrom4] = useState("");
-      const [from5, setFrom5] = useState("");
-      const [from6, setFrom6] = useState("");
-      const [from7, setFrom7] = useState("");
-      const [from8, setFrom8] = useState("");
-      const [from9, setFrom9] = useState("");
-      const [from10, setFrom10] = useState("");
- 
-     
-      const [datos1, setDatos1] = useState("");
-      const [datos2, setDatos2] = useState("");
-      const [datos3, setDatos3] = useState("");
-      const [datos4, setDatos4] = useState("");
-      const [datos5, setDatos5] = useState("");
-      const [datos6, setDatos6] = useState("");
-      const [datos7, setDatos7] = useState("");
-      const [datos8, setDatos8] = useState("");
-      const [datos9, setDatos9] = useState("");
-      const [datos10, setDatos10] = useState("");
-    
-      
-      const [statuz, setStatuz] = useState("");
-      const [comment, setComment] = useState("");
+        const fetchedData = await res.json();
+        console.log("Fetched Data:", fetchedData);
 
- 
-
-  
-  const [isDisabled, setIsDisabled] = useState(false);  
-  const router = useRouter();
-
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setIsDisabled(true);
-  
-    if (!tit || !start ) {
-      alert("يجب ادخال العنوان و الجهة الوارد منها");
-      return;
-    }
-  
-    try {
-      const res = await fetch("/api/vips", {
-        method: "POST",
-        headers: {
-          "Content-type": "application/json",
-        },
-        body: JSON.stringify({  tit, summ, start, tash, startDate, startDateout, place, place2, place3 , place4 ,place5,place6,place7, respo1, respo2, respo3, respo4, from1, from2, from3, from4, datos1, datos2, datos3, datos4, statuz, comment , refer }),
-      });
-  
-      if (res.ok) {
-        router.push("/dashboard/vipdashboard");
-        alert("تم إضافة الموضوع بنجاح .. شكراً لسيادتكم");
-      } else {
-        throw new Error("Failed to create a item");
+        if (Array.isArray(fetchedData)) {
+          setData(fetchedData);
+        } else if (fetchedData.alls && Array.isArray(fetchedData.alls)) {
+          setData(fetchedData.alls);
+        } else {
+          throw new Error("Unexpected data format");
+        }
+      } catch (error) {
+        console.error("Error fetching data:", error);
+        setData([]);
       }
-    } catch (error) {
-      console.log(error);
-    }
-  };
-  
-    
+    };
 
- 
+    getalls();
+  }, []);
 
- 
+  const filteredData = data.filter((all) => {
+    const allDate = dayjs(all.createdAt);
+    return (
+     
+      (dayFilter === "" || allDate.date() === parseInt(dayFilter)) &&
+      (monthFilter === "" || allDate.month() + 1 === parseInt(monthFilter))
+    );
+  });
+
+  const totalPages = Math.ceil(filteredData.length / rowsPerPage);
+  const paginatedData = filteredData.slice(
+    (currentPage - 1) * rowsPerPage,
+    currentPage * rowsPerPage
+  );
 
   return (
-    <form
-      name="new"
-      id="new"
-    //   autoComplete="on"
-      className="mx-auto mt-2 max-w-xl sm:mt-10 px-2 "
-      onSubmit={handleSubmit}
-    >
-      {/*  Title */}
-      <div className="bg-white py-2 px-4 rounded-lg">
-        <div className="relative bg-inherit">
-          <input
-            dir="rtl"
-            type="text"
-            id="title"
-            name="title"
-            value={tit}
-            onChange={(e) => setTit(e.target.value)}
-            className="peer bg-transparent h-10 w-full rounded-lg text-gray-900 placeholder-transparent ring-2 px-2 ring-gray-500 focus:ring-sky-600 focus:outline-none focus:border-rose-600"
-            placeholder="عنوان الموضوع"
-          />
-          <label
-            htmlFor="title"
-            className="absolute cursor-text right-0 -top-3 text-sm text-gray-500 bg-inherit mx-1 px-1 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-500 peer-placeholder-shown:top-2 peer-focus:-top-3 peer-focus:text-sky-600 peer-focus:text-sm transition-all"
-          >
-            عنوان الموضوع
-          </label>
-        </div>
-      </div>
-      {/* Summary */}
+    <div className="min-h-screen p-2 bg-gray-100 flex flex-col items-center w-full">
 
-      <div className="bg-white py-2 px-4 rounded-lg">
-        <div className="relative bg-inherit ">
-          <textarea
-            dir="rtl"
-            type="textarea"
-            id="summary"
-            name="title"
-            value={summ}
-            onChange={(e) => setSumm(e.target.value)}
-            className=" text-wrap peer bg-transparent h-20 w-full rounded-lg text-gray-900 placeholder-transparent ring-2 px-2 ring-gray-500 focus:ring-sky-600 focus:outline-none focus:border-rose-600"
-            placeholder="ملخص / وصف الموضوع "
-            rows={2}
-          />
-          <label
-            htmlFor="summary"
-            className="absolute cursor-text right-0 -top-3 text-sm text-gray-500 bg-inherit mx-1 px-1 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-500 peer-placeholder-shown:top-2 peer-focus:-top-3 peer-focus:text-sky-600 peer-focus:text-sm transition-all"
-          >
-            ملخص / وصف الموضوع
-          </label>
-        </div>
-      </div>
-  {/* comming Date */}
-      <div dir="rtl" className="bg-white py-2 px-4 rounded-lg sm:col-span-1">
-        <div className="relative bg-inherit ">
-          <DatePicker
-            selected={startDate}
-            dateFormat="dd/MM/yyyy" 
-            onChange={(date) => setStartDate(date)}
-            className="  h-10  rounded-lg text-gray-900  ring-2 px-2 ring-gray-500 focus:ring-sky-600 focus:outline-none focus:border-rose-600"
-          />
+      <div
+        dir="rtl"
+        className="mb-4 flex flex-col space-x-4 overflow-hidden md:flex-row "
+      >
+  
 
-          <CiCalendarDate
-            className="absolute right-32 top-0 text-sky-300 "
-            fontSize="2.5em"
-          />
 
-          <label
-            htmlFor="summary"
-            className="absolute cursor-text right-0 -top-3 text-sm text-gray-500 bg-inherit mx-1 px-1 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-500 peer-placeholder-shown:top-2 peer-focus:-top-3 peer-focus:text-sky-600 peer-focus:text-sm transition-all"
-          >
-            التاريخ 
-          </label>
-        </div>
-      </div>
+  
+  
      
-      {/* Start */}
-      <div className="bg-white py-2 px-4 rounded-lg">
-        <div className="relative bg-inherit">
-          <input
-            dir="rtl"
-            type="text"
-            id="start"
-            name="start"
-            value={start}
-            onChange={(e) => setStart(e.target.value)}
-            className="peer bg-transparent h-10 w-full rounded-lg text-gray-900 placeholder-transparent ring-2 px-2 ring-gray-500 focus:ring-sky-600 focus:outline-none focus:border-rose-600"
-            placeholder=" المسئول عن الموضوع"
-          />
-          <label
-            htmlFor="start"
-            className="absolute cursor-text right-0 -top-3 text-sm text-gray-500 bg-inherit mx-1 px-1 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-500 peer-placeholder-shown:top-2 peer-focus:-top-3 peer-focus:text-sky-600 peer-focus:text-sm transition-all"
-          >
- المسئول عن الموضوع         </label>
-        </div>
-      </div>
-      {/* التاشيره */}
-      <div className="bg-white py-2 px-4 rounded-lg">
-        <div className="relative bg-inherit">
-          <textarea
-            dir="rtl"
-            type="text"
-            id="signature"
-            name="signature"
-            value={tash}
-          onChange={(e) => setTash(e.target.value)}
-          placeholder=" الاجراءات أو التعليمات المطلوبة  "
-          className=" text-wrap peer bg-transparent h-16 w-full rounded-lg text-gray-900 placeholder-transparent ring-2 px-2 ring-gray-500 focus:ring-sky-600 focus:outline-none focus:border-rose-600"
-          />
-          <label
-            htmlFor="signature"
-            className="absolute cursor-text right-0 -top-3 text-sm text-gray-500 bg-inherit mx-1 px-1 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-500 peer-placeholder-shown:top-2 peer-focus:-top-3 peer-focus:text-sky-600 peer-focus:text-sm transition-all"
-          >
-الاجراءات أو التعليمات المطلوبة           </label>
-        </div>
-      </div>
-      {/* out Date */}
-            <div dir="rtl" className="bg-white py-2 px-4 rounded-lg sm:col-span-1">
-             <div className="relative bg-inherit ">
-               <DatePicker
-                 selected={startDateout}
-                 onChange={(date) => setStartDateout(date)}
-                 dateFormat="dd/MM/yyyy"
-                 className="  h-10  rounded-lg text-gray-900  ring-2 px-2 ring-gray-500 focus:ring-sky-600 focus:outline-none focus:border-rose-600"
-               />
-     
-               <CiCalendarDate
-                 className="absolute right-32 top-0 text-sky-300 "
-                 fontSize="2.5em"
-               />
-     
-               <label
-                 htmlFor="summary"
-                 className="absolute cursor-text right-0 -top-3 text-sm text-gray-500 bg-inherit mx-1 px-1 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-500 peer-placeholder-shown:top-2 peer-focus:-top-3 peer-focus:text-sky-600 peer-focus:text-sm transition-all"
-               >
-                  مقترح تاريخ التسليم / الإنهاء
-               </label>
-     
-             </div>
-       
-     
-           </div>
-     
-    
-      {/* test */}
-{/* reference number */}
-<div className="bg-white py-4 px-4 rounded-lg">
-        <div className="relative bg-inherit">
-          <input
-            dir="rtl"
-            type="tel"
-            id="refer"
-            name="refer"
-            placeholder="رقم مرجعي"
-            value={refer}
-            onChange={(e) => setRefer(e.target.value)}
-            className="peer bg-transparent h-10 w-full rounded-lg text-gray-900 placeholder-transparent ring-2 px-2 ring-gray-500 focus:ring-sky-600 focus:outline-none focus:border-rose-600"
-          />
-          <label
-           htmlFor="refer"
-            className="absolute cursor-text right-0 -top-3 text-sm text-gray-500 bg-inherit mx-1 px-1 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-500 peer-placeholder-shown:top-2 peer-focus:-top-3 peer-focus:text-sky-600 peer-focus:text-sm transition-all"
-          >
-            رقم مرجعي
-          </label>
-        </div>
+
+
+
+        <input
+          type="number"
+          placeholder="بحث باليوم  "
+          className="border p-1 rounded w-24 h-10"
+          value={dayFilter}
+          onChange={(e) => setDayFilter(e.target.value)}
+        />
+        <input
+          type="number"
+          placeholder="بحث بالشهر"
+          className="border p-1 rounded w-24 h-10"
+          value={monthFilter}
+          onChange={(e) => setMonthFilter(e.target.value)}
+        />
       </div>
 
-   
-
-      {/* Submit Button */}
-      <div className="sm:col-span-4 m-auto text-center ">
-        <button
-          type="submit"
-          disabled={isDisabled}
-          className=" m-4 mb-8 rounded bg-blue-500 px-12 py-2 text-white focus:outline-none"
+      <div className="w-full  bg-white shadow-md rounded-lg overflow-hidden ">
+        <table
+          dir="rtl"
+          className="w-full   border-separate border border-gray-400"
         >
-          {isDisabled ? "جاري الإرسال..." : "إضافة الموضوع "}
-        </button>
-      </div>
-    </form>
-  );
-};
+          <thead className="bg-gray-200 ">
+            <tr>
+              <th className="p-0 w-4 text-center text-blue-900">#</th>
+              <th className="p-1 w-36 text-center text-blue-900">موضوع الإجتماع</th>
 
-export default Form;
+
+              <th className="p-1 w-36 text-center text-teal-900">نتائج الإجتماع /التعليمات الصادرة</th>
+              <th className="p-1 text-center text-blue-900"> متابعة التعليمات / الردود الواردة</th>
+              <th className="p-1 w-16 text-center text-blue-900"> الحالة</th>
+              <th className="p-1 text-center text-blue-900">الإجراءات</th>
+            </tr>
+          </thead>
+          <tbody className="divide-y divide-gray-300">
+            {paginatedData.map((all) => (
+              <tr
+                key={all.id || all._id}
+                className="border-t divide-y divide-gray-300 text-sm w-8"
+              >
+                <td className=" bg-slate-200 text-xs text-center ">
+                  {paginatedData.indexOf(all) + 1}
+                  {/*
+                      <div className=" text-blue-800">
+                    {all.createdAt.slice(0, 10)}
+                  </div>
+                  */}
+                </td>
+                <td className=" bg-sky-200 text-center p-2 flex flex-col justify-center items-center w-48  ">
+                  
+                  <div className="font-bold" > {all.tit}</div>
+               <div className=" text-xs bg-sky-700 text-sky-50 p-1 rounded-md text-right"> الحضور / {all.summ}</div>
+                  <div className="text-xs"> بتاريخ  : {all.startDate.slice(0, 10)}</div>
+                 
+                  
+                </td>
+              
+
+                <td className="p-2 bg-blue-700 text-blue-50 font-bold  max-w-lg rounded-lg text-center  ">
+                  {all.tash}
+                  {/* 
+                    <button
+                    className=" w-32 bg-blue-500 p-1 text-slate-50 rounded-md text-center	mt-2"
+                    onClick={() =>
+                      document.getElementById("my_modal_2").showModal()
+                    }
+                  >
+                    نطاق التأشيرة
+                  </button>
+                  <dialog
+                    dir="rtl"
+                    id="my_modal_2"
+                    className="modal modal-bottom sm:modal-middle"
+                  >
+                    <div className="modal-box">
+                      <h3 className="font-bold text-lg text-blue-900">نطاق التأشيرة</h3>
+
+                      <div className="modal-action  min-w-500">
+                        <form method="dialog">
+                          <div className="flex flex-col h-20 justify-center items-center text-blue-900">
+                            {all.place}
+                            {all.place2}
+                        {all.place3}
+                          {all.place4}
+                         {all.place5}
+                           {all.place6}
+                           {all.place7}
+                          </div>
+                          <button className="w-16 bg-blue-500 p-1 text-slate-50 rounded-md text-center">
+                            Close
+                          </button>
+                        </form>
+                      </div>
+                    </div>
+                  </dialog>
+                  */}
+                
+                </td>
+
+                <td className="p-1 flex  ">
+                  <div className="flex flex-col justify-center items-start p-2 bg-gray-200 m-1">
+                    <div className="bg-sky-200 rounded-md p-1">{all.from1}</div>
+                    <div className="bg-sky-400 rounded-md p-1">{all.respo1}</div>
+                    <div className="bg-sky-100 rounded-md p-1">{all.datos1}</div>
+                  </div>
+                  <div className="flex flex-col justify-center items-start p-2 bg-gray-200 m-1">
+                    <div className="bg-sky-200 rounded-md p-1">{all.from2}</div>
+                    <div className="bg-sky-400 rounded-md p-1">{all.respo2}</div>
+                    <div className="bg-sky-100 rounded-md p-1">{all.datos2}</div>
+                  </div>
+                  <div className="flex flex-col justify-center items-start p-2 bg-gray-200 m-1">
+                    <div className="bg-sky-200 rounded-md p-1">{all.from3}</div>
+                    <div className="bg-sky-400 rounded-md p-1">{all.respo3}</div>
+                    <div className="bg-sky-100 rounded-md p-1">{all.datos3}</div>
+                  </div>
+                  <div className="flex flex-col justify-center items-start p-2 bg-gray-200 m-1">
+                    <div className="bg-sky-200 rounded-md p-1">{all.from4}</div>
+                    <div className="bg-sky-400 rounded-md p-1">{all.respo4}</div>
+                    <div className="bg-sky-100 rounded-md p-1">{all.datos4}</div>
+                  </div>
+                 
+                </td>
+
+                <td className="p-3 text-center ">
+                  {all.respo1 || all.respo2 || all.comment ? (
+                    <div className=" w-16 bg-teal-500 p-1 text-slate-50 rounded-md text-center">
+                      تم الــرد
+                    </div>
+                  ) : (
+                    <div className=" w-16 bg-pink-600 p-1 text-slate-50 rounded-md text-center">
+                      جاري الرد
+                    </div>
+                  )}
+                  <div>   {all.comment} </div>
+                 
+                </td>
+                <td className="p-0 text-center ">
+                  {/*
+                      <button
+                    onClick={handlePrint}
+                    className="btn btn-primary btn-sm m-2"
+                  >
+                    طباعة
+                  </button>
+                  */}
+              
+
+                  <RemoveBtn2 id={all._id} />
+
+                  <Link href={`/dashboard/editAll/${all._id}`}>
+                    <button className="btn btn-success btn-sm m-2">
+                      إضافة بيانات
+                    </button>
+                  </Link>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      <div className="mt-4 flex items-center space-x-2">
+        <button
+          onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+          className="px-6 py-1 bg-blue-500 text-white rounded"
+        >
+          السابق
+        </button>
+        <span>
+          Page {currentPage} of {totalPages}
+        </span>
+        <button
+          onClick={() =>
+            setCurrentPage((prev) => Math.min(prev + 1, totalPages))
+          }
+          className="px-6 py-1 bg-blue-500 text-white rounded"
+        >
+          التالي
+        </button>
+        <select
+          value={rowsPerPage}
+          onChange={(e) => setRowsPerPage(parseInt(e.target.value))}
+          className="border p-2 rounded"
+        >
+          <option value={5}>5 rows</option>
+          <option value={10}>10 rows</option>
+          <option value={15}>15 rows</option>
+        </select>
+      </div>
+    </div>
+  );
+}
