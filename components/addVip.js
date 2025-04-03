@@ -4,9 +4,7 @@ import { useRouter } from "next/navigation";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { CiCalendarDate } from "react-icons/ci";
-import { FaArrowUpWideShort } from "react-icons/fa6";
 
-import  {SignArea}  from "./SignArea";
 
 
 
@@ -17,26 +15,47 @@ const Form = () => {
   const [tit, setTit] = useState("");
   const [summ, setSumm] = useState("");
   const [startDate, setStartDate] = useState(new Date());
-  const [startDateout, setStartDateout] = useState("");
   const [start, setStart] = useState("");
   const [tash, setTash] = useState("");
-  const [imporatnce, setImporatnce] = useState("");
+    const [startDateout, setStartDateout] = useState("");
+  
   const [refer, setRefer] = useState("");
  
    const [respo1, setRespo1] = useState("");
    const [respo2, setRespo2] = useState("");
    const [respo3, setRespo3] = useState("");
    const [respo4, setRespo4] = useState("");
+   const [respo5, setRespo5] = useState("");
+   const [respo6, setRespo6] = useState("");
+   const [respo7, setRespo7] = useState("");
+   const [respo8, setRespo8] = useState("");
+   const [respo9, setRespo9] = useState("");
+   const [respo10, setRespo10] = useState("");
+
       
       const [from1, setFrom1] = useState("");
       const [from2, setFrom2] = useState("");
       const [from3, setFrom3] = useState("");
       const [from4, setFrom4] = useState("");
+      const [from5, setFrom5] = useState("");
+      const [from6, setFrom6] = useState("");
+      const [from7, setFrom7] = useState("");
+      const [from8, setFrom8] = useState("");
+      const [from9, setFrom9] = useState("");
+      const [from10, setFrom10] = useState("");
+ 
      
       const [datos1, setDatos1] = useState("");
       const [datos2, setDatos2] = useState("");
       const [datos3, setDatos3] = useState("");
       const [datos4, setDatos4] = useState("");
+      const [datos5, setDatos5] = useState("");
+      const [datos6, setDatos6] = useState("");
+      const [datos7, setDatos7] = useState("");
+      const [datos8, setDatos8] = useState("");
+      const [datos9, setDatos9] = useState("");
+      const [datos10, setDatos10] = useState("");
+    
       
       const [statuz, setStatuz] = useState("");
       const [comment, setComment] = useState("");
@@ -58,7 +77,7 @@ const Form = () => {
     }
   
     try {
-      const res = await fetch("/api/mains", {
+      const res = await fetch("/api/vips", {
         method: "POST",
         headers: {
           "Content-type": "application/json",
@@ -67,7 +86,7 @@ const Form = () => {
       });
   
       if (res.ok) {
-        router.push("/dashboard");
+        router.push("/dashboard/vipdashboard");
         alert("تم إضافة الموضوع بنجاح .. شكراً لسيادتكم");
       } else {
         throw new Error("Failed to create a item");
@@ -135,8 +154,7 @@ const Form = () => {
           </label>
         </div>
       </div>
-
-      {/* comming Date */}
+  {/* comming Date */}
       <div dir="rtl" className="bg-white py-2 px-4 rounded-lg sm:col-span-1">
         <div className="relative bg-inherit ">
           <DatePicker
@@ -155,10 +173,11 @@ const Form = () => {
             htmlFor="summary"
             className="absolute cursor-text right-0 -top-3 text-sm text-gray-500 bg-inherit mx-1 px-1 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-500 peer-placeholder-shown:top-2 peer-focus:-top-3 peer-focus:text-sky-600 peer-focus:text-sm transition-all"
           >
-            تاريخ الوارد
+            التاريخ 
           </label>
         </div>
       </div>
+     
       {/* Start */}
       <div className="bg-white py-2 px-4 rounded-lg">
         <div className="relative bg-inherit">
@@ -170,13 +189,13 @@ const Form = () => {
             value={start}
             onChange={(e) => setStart(e.target.value)}
             className="peer bg-transparent h-10 w-full rounded-lg text-gray-900 placeholder-transparent ring-2 px-2 ring-gray-500 focus:ring-sky-600 focus:outline-none focus:border-rose-600"
-            placeholder=" الجهة الوارد منها "
+            placeholder=" المسئول عن الموضوع"
           />
           <label
             htmlFor="start"
             className="absolute cursor-text right-0 -top-3 text-sm text-gray-500 bg-inherit mx-1 px-1 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-500 peer-placeholder-shown:top-2 peer-focus:-top-3 peer-focus:text-sky-600 peer-focus:text-sm transition-all"
           >
- الجهة الوارد منها           </label>
+ المسئول عن الموضوع         </label>
         </div>
       </div>
       {/* التاشيره */}
@@ -189,85 +208,45 @@ const Form = () => {
             name="signature"
             value={tash}
           onChange={(e) => setTash(e.target.value)}
-          placeholder=" التأشيرة الصادرة  "
+          placeholder=" الاجراءات أو التعليمات المطلوبة  "
           className=" text-wrap peer bg-transparent h-16 w-full rounded-lg text-gray-900 placeholder-transparent ring-2 px-2 ring-gray-500 focus:ring-sky-600 focus:outline-none focus:border-rose-600"
           />
           <label
             htmlFor="signature"
             className="absolute cursor-text right-0 -top-3 text-sm text-gray-500 bg-inherit mx-1 px-1 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-500 peer-placeholder-shown:top-2 peer-focus:-top-3 peer-focus:text-sky-600 peer-focus:text-sm transition-all"
           >
-التأشيرة الصادرة           </label>
+الاجراءات أو التعليمات المطلوبة           </label>
         </div>
       </div>
-      {/*   importance */}
-
-       <div dir="rtl" className="py-2 px-8 bg-sky-200 rounded-lg m-2">
-              <details className="group">
-
-                <summary className="flex cursor-pointer list-none items-center justify-between font-medium">
-                <FaArrowUpWideShort fontSize="1.5em" className=" ml-2 "/>
-      
-                  <span>درجة الأهمية</span>
-                  <span className="transition group-open:rotate-180">
-                    <svg
-                      fill="none"
-                      height={24}
-                      shapeRendering="geometricPrecision"
-                      stroke="currentColor"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="1.5"
-                      viewBox="0 0 24 24"
-                      width={24}
-                    >
-                      <path d="M6 9l6 6 6-6" />
-                    </svg>
-                  </span>
-                </summary>
-      
-                <select
-                value={imporatnce}
-                onChange={(e) => setImporatnce(e.target.value)}
-                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1.5"
-              >
-                <option value="هام">هام</option>
-                  <option value="عاجل">عاجل</option>
-                  
-                  <option value="عاجل جداً">عاجل جداً</option>
-                
-              </select>
-              </details>
-            </div>
-       {/* out Date */}
-       <div dir="rtl" className="bg-white py-2 px-4 rounded-lg sm:col-span-1">
-        <div className="relative bg-inherit ">
-          <DatePicker
-            selected={startDateout}
-            onChange={(date) => setStartDateout(date)}
-            dateFormat="dd/MM/yyyy"
-            className="  h-10  rounded-lg text-gray-900  ring-2 px-2 ring-gray-500 focus:ring-sky-600 focus:outline-none focus:border-rose-600"
-          />
-
-          <CiCalendarDate
-            className="absolute right-32 top-0 text-sky-300 "
-            fontSize="2.5em"
-          />
-
-          <label
-            htmlFor="summary"
-            className="absolute cursor-text right-0 -top-3 text-sm text-gray-500 bg-inherit mx-1 px-1 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-500 peer-placeholder-shown:top-2 peer-focus:-top-3 peer-focus:text-sky-600 peer-focus:text-sm transition-all"
-          >
-            تاريخ التأشيرة/ الإجراء
-          </label>
-
-        </div>
-  
-
-      </div>
-    
+      {/* out Date */}
+            <div dir="rtl" className="bg-white py-2 px-4 rounded-lg sm:col-span-1">
+             <div className="relative bg-inherit ">
+               <DatePicker
+                 selected={startDateout}
+                 onChange={(date) => setStartDateout(date)}
+                 dateFormat="dd/MM/yyyy"
+                 className="  h-10  rounded-lg text-gray-900  ring-2 px-2 ring-gray-500 focus:ring-sky-600 focus:outline-none focus:border-rose-600"
+               />
+     
+               <CiCalendarDate
+                 className="absolute right-32 top-0 text-sky-300 "
+                 fontSize="2.5em"
+               />
+     
+               <label
+                 htmlFor="summary"
+                 className="absolute cursor-text right-0 -top-3 text-sm text-gray-500 bg-inherit mx-1 px-1 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-500 peer-placeholder-shown:top-2 peer-focus:-top-3 peer-focus:text-sky-600 peer-focus:text-sm transition-all"
+               >
+                  مقترح تاريخ التسليم / الإنهاء
+               </label>
+     
+             </div>
+       
+     
+           </div>
+     
     
       {/* test */}
-    <SignArea />
 {/* reference number */}
 <div className="bg-white py-4 px-4 rounded-lg">
         <div className="relative bg-inherit">
