@@ -162,6 +162,132 @@ export default function EditMainsForm({ id, respo1, respo2, respo3,respo4,respo5
                 className="input input-bordered input-accent w-full max-w-xs p-2"
                 type="text"
             />
+            <input
+                onChange={(e) => setNewrespo5(e.target.value)}
+                value={newrespo4}
+                placeholder="اكتب الرد هنا...."
+                className="input input-bordered input-accent w-full max-w-xs p-2"
+                type="text"
+            />
+            <input
+                onChange={(e) => setNewfrom5(e.target.value)}
+                value={newfrom4}
+                placeholder="اكتب الجهة الوارد منها الرد...."
+                className="input input-bordered input-accent w-full max-w-xs p-2"
+                type="text"
+            />
+            <input
+                onChange={(e) => setNewdatos5(e.target.value)}
+                value={newdatos4}
+                placeholder="اكتب تاريخ الرد ...."
+                className="input input-bordered input-accent w-full max-w-xs p-2"
+                type="text"
+            />
+            <input
+                onChange={(e) => setNewrespo6(e.target.value)}
+                value={newrespo4}
+                placeholder="اكتب الرد هنا...."
+                className="input input-bordered input-accent w-full max-w-xs p-2"
+                type="text"
+            />
+            <input
+                onChange={(e) => setNewfrom6(e.target.value)}
+                value={newfrom4}
+                placeholder="اكتب الجهة الوارد منها الرد...."
+                className="input input-bordered input-accent w-full max-w-xs p-2"
+                type="text"
+            />
+            <input
+                onChange={(e) => setNewdatos6(e.target.value)}
+                value={newdatos4}
+                placeholder="اكتب تاريخ الرد ...."
+                className="input input-bordered input-accent w-full max-w-xs p-2"
+                type="text"
+            />
+            <input
+                onChange={(e) => setNewrespo7(e.target.value)}
+                value={newrespo4}
+                placeholder="اكتب الرد هنا...."
+                className="input input-bordered input-accent w-full max-w-xs p-2"
+                type="text"
+            />
+            <input
+                onChange={(e) => setNewfrom7(e.target.value)}
+                value={newfrom4}
+                placeholder="اكتب الجهة الوارد منها الرد...."
+                className="input input-bordered input-accent w-full max-w-xs p-2"
+                type="text"
+            />
+            <input
+                onChange={(e) => setNewdatos7(e.target.value)}
+                value={newdatos4}
+                placeholder="اكتب تاريخ الرد ...."
+                className="input input-bordered input-accent w-full max-w-xs p-2"
+                type="text"
+            />
+            <input
+                onChange={(e) => setNewrespo8(e.target.value)}
+                value={newrespo4}
+                placeholder="اكتب الرد هنا...."
+                className="input input-bordered input-accent w-full max-w-xs p-2"
+                type="text"
+            />
+            <input
+                onChange={(e) => setNewfrom8(e.target.value)}
+                value={newfrom4}
+                placeholder="اكتب الجهة الوارد منها الرد...."
+                className="input input-bordered input-accent w-full max-w-xs p-2"
+                type="text"
+            />
+            <input
+                onChange={(e) => setNewdatos8(e.target.value)}
+                value={newdatos4}
+                placeholder="اكتب تاريخ الرد ...."
+                className="input input-bordered input-accent w-full max-w-xs p-2"
+                type="text"
+            />
+            <input
+                onChange={(e) => setNewrespo9(e.target.value)}
+                value={newrespo4}
+                placeholder="اكتب الرد هنا...."
+                className="input input-bordered input-accent w-full max-w-xs p-2"
+                type="text"
+            />
+            <input
+                onChange={(e) => setNewfrom9(e.target.value)}
+                value={newfrom4}
+                placeholder="اكتب الجهة الوارد منها الرد...."
+                className="input input-bordered input-accent w-full max-w-xs p-2"
+                type="text"
+            />
+            <input
+                onChange={(e) => setNewdatos9(e.target.value)}
+                value={newdatos4}
+                placeholder="اكتب تاريخ الرد ...."
+                className="input input-bordered input-accent w-full max-w-xs p-2"
+                type="text"
+            />
+            <input
+                onChange={(e) => setNewrespo10(e.target.value)}
+                value={newrespo4}
+                placeholder="اكتب الرد هنا...."
+                className="input input-bordered input-accent w-full max-w-xs p-2"
+                type="text"
+            />
+            <input
+                onChange={(e) => setNewfrom10(e.target.value)}
+                value={newfrom4}
+                placeholder="اكتب الجهة الوارد منها الرد...."
+                className="input input-bordered input-accent w-full max-w-xs p-2"
+                type="text"
+            />
+            <input
+                onChange={(e) => setNewdatos10(e.target.value)}
+                value={newdatos4}
+                placeholder="اكتب تاريخ الرد ...."
+                className="input input-bordered input-accent w-full max-w-xs p-2"
+                type="text"
+            />
            
    
            </div>
@@ -169,7 +295,7 @@ export default function EditMainsForm({ id, respo1, respo2, respo3,respo4,respo5
                 onChange={(e) => setNewComment(e.target.value)}
                 value={newComment}
                 placeholder="اكتب تعليق نهائي...."
-                className="input input-bordered input-accent w-full max-w-xs p-2 m-4"
+                className="input input-bordered input-accent w-full max-w-xs p-4 mx-8 my-2"
                 type="text"
             />
  
