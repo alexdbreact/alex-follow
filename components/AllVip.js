@@ -138,7 +138,7 @@ export default function DataTables() {
               
 
                 <td className="p-2 bg-blue-700 text-blue-50 font-bold  max-w-lg rounded-lg text-center  ">
-                  {vip.tash}
+                  {vip.start}
             
                 
                 </td>
