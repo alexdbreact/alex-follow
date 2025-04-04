@@ -221,7 +221,7 @@ export default function DataTables() {
                   */}
               
 
-                  <RemoveBtn2 id={vip._id} />
+                  <RemoveBtn3 id={vip._id} />
 
                   <Link href={`/dashboard/editVip/${vip._id}`}>
                     <button className="btn btn-success btn-sm m-2">
