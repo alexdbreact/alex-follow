@@ -3,15 +3,14 @@ const topicSchema = new Schema(
   {
     tit: {
     type: String,
-    required: [true, 'Please provide the book title.'],
+    required: [true, 'Please provide the  title.'],
   },
   start: {
     type: String,
-    required: [true, 'Please provide the book author.'],
+    required: [true, 'Please provide the responsible.'],
   },
   tash: {
     type: String,
-    required: [true, 'Please provide the book author.'],
   },
   
   summ: {
