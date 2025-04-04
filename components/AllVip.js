@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 import dayjs from "dayjs";
 import Link from "next/link";
-import RemoveBtn2 from "./RemoveBtn2";
+import RemoveBtn3 from "./RemoveBtn3";
 
 
 export default function DataTables() {
