@@ -8,7 +8,7 @@ import { CiCalendarDate } from "react-icons/ci";
 
 
 
-const Form = () => {
+const AddVip = () => {
 
  
 
@@ -17,8 +17,7 @@ const Form = () => {
   const [startDate, setStartDate] = useState(new Date());
   const [start, setStart] = useState("");
   const [tash, setTash] = useState("");
-    const [startDateout, setStartDateout] = useState("");
-  
+  const [startDateout, setStartDateout] = useState("");  
   const [refer, setRefer] = useState("");
  
    const [respo1, setRespo1] = useState("");
@@ -72,7 +71,7 @@ const Form = () => {
     setIsDisabled(true);
   
     if (!tit || !start ) {
-      alert("يجب ادخال العنوان و الجهة الوارد منها");
+      alert("يجب ادخال عنوان الموضوع و المسئول عنه ");
       return;
     }
   
@@ -82,7 +81,7 @@ const Form = () => {
         headers: {
           "Content-type": "application/json",
         },
-        body: JSON.stringify({  tit, summ, start, tash, startDate, startDateout, place, place2, place3 , place4 ,place5,place6,place7, respo1, respo2, respo3, respo4, from1, from2, from3, from4, datos1, datos2, datos3, datos4, statuz, comment , refer }),
+        body: JSON.stringify({  tit, summ, start, tash, startDate, startDateout,  respo1, respo2, respo3,respo4,respo5, respo6, respo7,respo8,respo9,respo10,from1,from2,from3,from4,from5,from6,from7,from8,from9,from10,datos1,datos2,datos3,datos4,datos5,datos6,datos7,datos8,datos9,datos10,statuz,comment, refer  }),
       });
   
       if (res.ok) {
@@ -208,7 +207,7 @@ const Form = () => {
             name="signature"
             value={tash}
           onChange={(e) => setTash(e.target.value)}
-          placeholder=" الاجراءات أو التعليمات المطلوبة  "
+          placeholder=" الاجراءات أو التعليمات المطلوبة "
           className=" text-wrap peer bg-transparent h-16 w-full rounded-lg text-gray-900 placeholder-transparent ring-2 px-2 ring-gray-500 focus:ring-sky-600 focus:outline-none focus:border-rose-600"
           />
           <label
@@ -285,4 +284,4 @@ const Form = () => {
   );
 };
 
-export default Form;
+export default AddVip;
