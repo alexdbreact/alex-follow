@@ -1,5 +1,5 @@
 import React from 'react'
-import AddForm from '@/components/addVip'
+import AddVip from '@/components/addVip'
 import { PiFolderStarBold } from "react-icons/pi";
 import Link from 'next/link'
 import { SiBeatstars } from "react-icons/si";
@@ -17,7 +17,7 @@ const page = () => {
               إضافة موضوع / ملف هام
 
               </div>
-              <AddForm />
+              <AddVip />
               </div>
 
   </>
