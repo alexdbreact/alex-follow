@@ -18,9 +18,9 @@ export default function DataTables() {
  
 
   useEffect(() => {
-    const getalls = async () => {
+    const getvips = async () => {
       try {
-        const res = await fetch("/api/alls", {
+        const res = await fetch("/api/vips", {
           cache: "no-store",
         });
         if (!res.ok) {
@@ -32,8 +32,8 @@ export default function DataTables() {
 
         if (Array.isArray(fetchedData)) {
           setData(fetchedData);
-        } else if (fetchedData.alls && Array.isArray(fetchedData.alls)) {
-          setData(fetchedData.alls);
+        } else if (fetchedData.vips && Array.isArray(fetchedData.vips)) {
+          setData(fetchedData.vips);
         } else {
           throw new Error("Unexpected data format");
         }
@@ -43,15 +43,15 @@ export default function DataTables() {
       }
     };
 
-    getalls();
+    getvips();
   }, []);
 
-  const filteredData = data.filter((all) => {
-    const allDate = dayjs(all.createdAt);
+  const filteredData = data.filter((vip) => {
+    const vipDate = dayjs(vip.createdAt);
     return (
      
-      (dayFilter === "" || allDate.date() === parseInt(dayFilter)) &&
-      (monthFilter === "" || allDate.month() + 1 === parseInt(monthFilter))
+      (dayFilter === "" || vipDate.date() === parseInt(dayFilter)) &&
+      (monthFilter === "" || vipDate.month() + 1 === parseInt(monthFilter))
     );
   });
 
@@ -63,10 +63,12 @@ export default function DataTables() {
 
   return (
     <div className="min-h-screen p-2 bg-gray-100 flex flex-col items-center w-full">
-
+<h1 className="px-8 py-2 text-2xl font-bold text-sky-700 ">
+  الموضوعات و الملفات الهامة
+</h1>
       <div
         dir="rtl"
-        className="mb-4 flex flex-col space-x-4 overflow-hidden md:flex-row "
+        className="mb-4 flex  flex-col space-x-4 overflow-hidden md:flex-row "
       >
   
 
@@ -80,14 +82,14 @@ export default function DataTables() {
         <input
           type="number"
           placeholder="بحث باليوم  "
-          className="border p-1 rounded w-24 h-10"
+          className="border p-1 rounded w-48 h-10"
           value={dayFilter}
           onChange={(e) => setDayFilter(e.target.value)}
         />
         <input
           type="number"
           placeholder="بحث بالشهر"
-          className="border p-1 rounded w-24 h-10"
+          className="border p-1 rounded w-48 h-10"
           value={monthFilter}
           onChange={(e) => setMonthFilter(e.target.value)}
         />
@@ -104,103 +106,99 @@ export default function DataTables() {
               <th className="p-1 w-36 text-center text-blue-900">موضوع الإجتماع</th>
 
 
-              <th className="p-1 w-36 text-center text-teal-900">نتائج الإجتماع /التعليمات الصادرة</th>
-              <th className="p-1 text-center text-blue-900"> متابعة التعليمات / الردود الواردة</th>
+              <th className="p-1  w-36 text-center text-teal-900">المسئول عن الموضوع </th>
+              <th className="p-1  text-center text-blue-900"> متابعة الموضوع / الاجراءات المُتخذة</th>
               <th className="p-1 w-16 text-center text-blue-900"> الحالة</th>
-              <th className="p-1 text-center text-blue-900">الإجراءات</th>
+              <th className="p-1 w-36 text-center text-blue-900">تحديث البيانات</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-300">
-            {paginatedData.map((all) => (
+            {paginatedData.map((vip) => (
               <tr
-                key={all.id || all._id}
+                key={vip.id || vip._id}
                 className="border-t divide-y divide-gray-300 text-sm w-8"
               >
                 <td className=" bg-slate-200 text-xs text-center ">
-                  {paginatedData.indexOf(all) + 1}
+                  {paginatedData.indexOf(vip) + 1}
                   {/*
                       <div className=" text-blue-800">
-                    {all.createdAt.slice(0, 10)}
+                    {vip.createdAt.slice(0, 10)}
                   </div>
                   */}
                 </td>
                 <td className=" bg-sky-200 text-center p-2 flex flex-col justify-center items-center w-48  ">
-                  
-                  <div className="font-bold" > {all.tit}</div>
-               <div className=" text-xs bg-sky-700 text-sky-50 p-1 rounded-md text-right"> الحضور / {all.summ}</div>
-                  <div className="text-xs"> بتاريخ  : {all.startDate.slice(0, 10)}</div>
+                <div className="text-xs"> بتاريخ  : {vip.startDate.slice(0, 10)}</div>
+                  <div className="font-bold" > {vip.tit}</div>
+               <div className=" text-xs bg-sky-700 text-sky-50 p-1 rounded-md text-right">  / {vip.summ}</div>
+               <div className=" text-xs bg-sky-700 text-sky-50 p-1 rounded-md text-right">  / {vip.tash}</div>
+               <div className="text-xs"> ميعاد التسليم / الإنهاء  : {vip.startDateout.slice(0, 10)}</div>
                  
                   
                 </td>
               
 
                 <td className="p-2 bg-blue-700 text-blue-50 font-bold  max-w-lg rounded-lg text-center  ">
-                  {all.tash}
-                  {/* 
-                    <button
-                    className=" w-32 bg-blue-500 p-1 text-slate-50 rounded-md text-center	mt-2"
-                    onClick={() =>
-                      document.getElementById("my_modal_2").showModal()
-                    }
-                  >
-                    نطاق التأشيرة
-                  </button>
-                  <dialog
-                    dir="rtl"
-                    id="my_modal_2"
-                    className="modal modal-bottom sm:modal-middle"
-                  >
-                    <div className="modal-box">
-                      <h3 className="font-bold text-lg text-blue-900">نطاق التأشيرة</h3>
-
-                      <div className="modal-action  min-w-500">
-                        <form method="dialog">
-                          <div className="flex flex-col h-20 justify-center items-center text-blue-900">
-                            {all.place}
-                            {all.place2}
-                        {all.place3}
-                          {all.place4}
-                         {all.place5}
-                           {all.place6}
-                           {all.place7}
-                          </div>
-                          <button className="w-16 bg-blue-500 p-1 text-slate-50 rounded-md text-center">
-                            Close
-                          </button>
-                        </form>
-                      </div>
-                    </div>
-                  </dialog>
-                  */}
+                  {vip.tash}
+            
                 
                 </td>
 
                 <td className="p-1 flex  ">
                   <div className="flex flex-col justify-center items-start p-2 bg-gray-200 m-1">
-                    <div className="bg-sky-200 rounded-md p-1">{all.from1}</div>
-                    <div className="bg-sky-400 rounded-md p-1">{all.respo1}</div>
-                    <div className="bg-sky-100 rounded-md p-1">{all.datos1}</div>
+                    <div className="bg-sky-200 rounded-md p-1">{vip.from1}</div>
+                    <div className="bg-sky-400 rounded-md p-1">{vip.respo1}</div>
+                    <div className="bg-sky-100 rounded-md p-1">{vip.datos1}</div>
                   </div>
                   <div className="flex flex-col justify-center items-start p-2 bg-gray-200 m-1">
-                    <div className="bg-sky-200 rounded-md p-1">{all.from2}</div>
-                    <div className="bg-sky-400 rounded-md p-1">{all.respo2}</div>
-                    <div className="bg-sky-100 rounded-md p-1">{all.datos2}</div>
+                    <div className="bg-sky-200 rounded-md p-1">{vip.from2}</div>
+                    <div className="bg-sky-400 rounded-md p-1">{vip.respo2}</div>
+                    <div className="bg-sky-100 rounded-md p-1">{vip.datos2}</div>
                   </div>
                   <div className="flex flex-col justify-center items-start p-2 bg-gray-200 m-1">
-                    <div className="bg-sky-200 rounded-md p-1">{all.from3}</div>
-                    <div className="bg-sky-400 rounded-md p-1">{all.respo3}</div>
-                    <div className="bg-sky-100 rounded-md p-1">{all.datos3}</div>
+                    <div className="bg-sky-200 rounded-md p-1">{vip.from3}</div>
+                    <div className="bg-sky-400 rounded-md p-1">{vip.respo3}</div>
+                    <div className="bg-sky-100 rounded-md p-1">{vip.datos3}</div>
                   </div>
                   <div className="flex flex-col justify-center items-start p-2 bg-gray-200 m-1">
-                    <div className="bg-sky-200 rounded-md p-1">{all.from4}</div>
-                    <div className="bg-sky-400 rounded-md p-1">{all.respo4}</div>
-                    <div className="bg-sky-100 rounded-md p-1">{all.datos4}</div>
+                    <div className="bg-sky-200 rounded-md p-1">{vip.from4}</div>
+                    <div className="bg-sky-400 rounded-md p-1">{vip.respo4}</div>
+                    <div className="bg-sky-100 rounded-md p-1">{vip.datos4}</div>
+                  </div>
+                  <div className="flex flex-col justify-center items-start p-2 bg-gray-200 m-1">
+                    <div className="bg-sky-200 rounded-md p-1">{vip.from5}</div>
+                    <div className="bg-sky-400 rounded-md p-1">{vip.respo5}</div>
+                    <div className="bg-sky-100 rounded-md p-1">{vip.datos5}</div>
+                  </div>
+                  <div className="flex flex-col justify-center items-start p-2 bg-gray-200 m-1">
+                    <div className="bg-sky-200 rounded-md p-1">{vip.from6}</div>
+                    <div className="bg-sky-400 rounded-md p-1">{vip.respo6}</div>
+                    <div className="bg-sky-100 rounded-md p-1">{vip.datos6}</div>
+                  </div>
+                  <div className="flex flex-col justify-center items-start p-2 bg-gray-200 m-1">
+                    <div className="bg-sky-200 rounded-md p-1">{vip.from7}</div>
+                    <div className="bg-sky-400 rounded-md p-1">{vip.respo7}</div>
+                    <div className="bg-sky-100 rounded-md p-1">{vip.datos7}</div>
+                  </div>
+                  <div className="flex flex-col justify-center items-start p-2 bg-gray-200 m-1">
+                    <div className="bg-sky-200 rounded-md p-1">{vip.from8}</div>
+                    <div className="bg-sky-400 rounded-md p-1">{vip.respo8}</div>
+                    <div className="bg-sky-100 rounded-md p-1">{vip.datos8}</div>
+                  </div>
+                  <div className="flex flex-col justify-center items-start p-2 bg-gray-200 m-1">
+                    <div className="bg-sky-200 rounded-md p-1">{vip.from9}</div>
+                    <div className="bg-sky-400 rounded-md p-1">{vip.respo9}</div>
+                    <div className="bg-sky-100 rounded-md p-1">{vip.datos9}</div>
+                  </div>
+                  <div className="flex flex-col justify-center items-start p-2 bg-gray-200 m-1">
+                    <div className="bg-sky-200 rounded-md p-1">{vip.from10}</div>
+                    <div className="bg-sky-400 rounded-md p-1">{vip.respo10}</div>
+                    <div className="bg-sky-100 rounded-md p-1">{vip.datos10}</div>
                   </div>
                  
                 </td>
 
                 <td className="p-3 text-center ">
-                  {all.respo1 || all.respo2 || all.comment ? (
+                  {vip.respo1 || vip.respo2 || vip.comment ? (
                     <div className=" w-16 bg-teal-500 p-1 text-slate-50 rounded-md text-center">
                       تم الــرد
                     </div>
@@ -209,7 +207,7 @@ export default function DataTables() {
                       جاري الرد
                     </div>
                   )}
-                  <div>   {all.comment} </div>
+                  <div>   {vip.comment} </div>
                  
                 </td>
                 <td className="p-0 text-center ">
@@ -223,9 +221,9 @@ export default function DataTables() {
                   */}
               
 
-                  <RemoveBtn2 id={all._id} />
+                  <RemoveBtn2 id={vip._id} />
 
-                  <Link href={`/dashboard/editAll/${all._id}`}>
+                  <Link href={`/dashboard/editVip/${vip._id}`}>
                     <button className="btn btn-success btn-sm m-2">
                       إضافة بيانات
                     </button>
