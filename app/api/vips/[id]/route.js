@@ -25,7 +25,7 @@ export async function GET(request, { params }) {
     const { newrespo1, newrespo2, newrespo3, newrespo4,newrespo5, newrespo6, newrespo7, newrespo8,newrespo9, newrespo10,  newfrom1, newfrom2, newfrom3, newfrom4,newfrom5, newfrom6, newfrom7, newfrom8,newfrom9, newfrom10,  newdatos1, newdatos2, newdatos3, newdatos4, newdatos5, newdatos6, newdatos7, newdatos8, newdatos9, newdatos10,  newstatuz, newComment } = await request.json();
 
     await dbConnect();
-    await Main.findByIdAndUpdate(id, {
+    await Vip.findByIdAndUpdate(id, {
         respo1: newrespo1,
         respo2: newrespo2,
         respo3: newrespo3,
