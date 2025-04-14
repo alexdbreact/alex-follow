@@ -12,7 +12,7 @@ const Navbar = () => {
   
 <Image
      src={alexo}
-width={60}
+width={80}
 height= {60}
 alt='app logo'
 priority="true"
@@ -21,9 +21,9 @@ priority="true"
 <div className=' flex flex-row justify-center items-center '
  >
     <Image
-     src={"https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExcG0wcW9keHdkcXdmbXk5enE3ZTBjZnN5aDdhdTR0d2Q4eGI5MDdzNCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/ZgTR3UQ9XAWDvqy9jv/giphy.gif"}
-width={50}
-height= {50}
+     src={"https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExNnhxamx0NWphcGxlanc1Y29ybXh4cnFkNjc1YWFpMXRhZGxqNzQxZiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/dWesBcTLavkZuG35MI/giphy.gif"}
+width={80}
+height= {60}
 alt='app logo'
 priority="true"
 className='  '
