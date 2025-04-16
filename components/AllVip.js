@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 import dayjs from "dayjs";
 import Link from "next/link";
-import RemoveBtn2 from "./RemoveBtn2";
+import RemoveBtn3 from "./RemoveBtn3";
 
 
 export default function DataTables() {
@@ -222,7 +222,7 @@ export default function DataTables() {
                   */}
               
 
-                  <RemoveBtn2 id={vip._id} />
+                  <RemoveBtn3 id={vip._id} />
 
                   <Link href={`/dashboard/editVip/${vip._id}`}>
                     <button className="btn btn-success btn-sm m-2">
