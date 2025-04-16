@@ -3,7 +3,7 @@
  
 import { useRouter } from "next/navigation";
  
-export default function RemoveBtn({ id }) {
+export default function RemoveBtn3({ id }) {
     const router = useRouter();
     const removeProduct= async () => {
         const confirmed = confirm("Are you sure?");
