@@ -63,7 +63,7 @@ export default function EditMainsForm({ id,tit,summ,tash, respo1, respo2, respo3
             }
  
             router.refresh();
-            router.push("/dashboard");
+            router.push("/dashboard/vipdashboard");
         } catch (error) {
             console.log(error);
         }
