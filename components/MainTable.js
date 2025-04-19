@@ -220,7 +220,7 @@ const paginatedData = filteredData.slice(
                 <td className=" bg-blue-200 text-center p-2 flex flex-col justify-center items-center w-48  ">
                   
                   <div className="font-bold" > {main.tit}</div>
-                  <div className=" text-xs bg-sky-700 text-sky-50 p-1 rounded-md animate-pulse animate-infinite text-balance text-center">{main.summ}</div>
+                  <div className=" text-xs bg-sky-700 text-sky-50 p-1 rounded-md  text-balance text-center">{main.summ}</div>
                   <div className="text-xs"> وارد من : {main.start}</div>
                   <div className="text-xs"> بتاريخ  : {main.startDate.slice(0, 10)}</div>
                  
@@ -242,7 +242,7 @@ const paginatedData = filteredData.slice(
                     <span className=" w-16 bg-transparent p-1 text-slate-50 rounded-md text-center">
                     </span>
                   )}
-<div className="animate-pulse animate-infinite text-balance" >
+<div className=" text-balance" >
     {main.tash}
 </div>
                 
